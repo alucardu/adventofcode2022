@@ -19,7 +19,7 @@ function priorityItemsValue(items: Array<string>) {
     const compartmentLength = item.length / 2
     const firstCompartment = item.slice(0, compartmentLength);
     const secondCompartment = item.slice(compartmentLength, compartmentLength * 2);
-    const duplicateItem = [ ...firstCompartment].filter((item) => secondCompartment.includes(item) ? item : null)[0]
+    const duplicateItem = [ ...firstCompartment].filter((letter) => secondCompartment.includes(letter) ? letter : null)[0]
     priorityItemsValue += getPriority(duplicateItem)
   })
   console.log(priorityItemsValue)
@@ -41,13 +41,8 @@ function badgesValue(items: Array<string>) {
   })
 
   allElfGroups.map((elfGroup) => {
-    const badge = elfGroup.map((elf) => {
-      let letter = [...elf].filter((letter) => {
-        return elfGroup[0].includes(letter) && elfGroup[1].includes(letter) && elfGroup[2].includes(letter) ? letter : null
-      })
-      return letter[0];
-    })
-    priorityItemsValue += getPriority(badge[0])
+    const badge = elfGroup.map((elf) => [...elf].filter((elfLetter) => elfGroup[0].includes(elfLetter) && elfGroup[1].includes(elfLetter) && elfGroup[2].includes(elfLetter) ? elfLetter : null)[0])[0]
+    priorityItemsValue += getPriority(badge)
   })
   console.log(priorityItemsValue)
 }
